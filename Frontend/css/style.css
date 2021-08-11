@@ -2,6 +2,24 @@ body {
 
 	font-family: 'Courier Prime', monospace;
 	font-size: 20px;
+	background-color: #EBE4D7;
+	color: black;
+
+}
+
+
+
+/* <<<< HEADER >>>> */
+
+header {
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border: 10px solid #504F4C;
+	background-color: #504F4C;
+	color: #EBE4D7;
+	box-shadow: 2px 2px 5px black;
 
 }
 
@@ -10,11 +28,16 @@ h1 {
 
 	font-family: 'Faster One', cursive;
 	font-size: 52px;
+	padding-left: 30px;
+	text-shadow: 3px 3px 5px black;
 }
 
 .fa-shopping-cart {
 
-	display: flex;
-	justify-content: flex-end;
 	cursor: pointer;
-}	
+	padding-bottom: 20px; 
+	margin-top: 60px;
+	margin-right: 40px;
+	text-shadow: 3px 3px 5px black;
+}
+
