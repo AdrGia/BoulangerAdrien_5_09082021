@@ -11,6 +11,7 @@ body {
 
 /* <<<< HEADER >>>> */
 
+
 header {
 
 	display: flex;
@@ -41,3 +42,31 @@ h1 {
 	text-shadow: 3px 3px 5px black;
 }
 
+
+
+/* <<<< MAIN >>>> */
+
+h2 {
+
+	margin-top: 100px;
+}
+
+article {
+
+
+}
+
+
+
+/* <<<< FOOTER >>>> */
+
+footer {
+
+	border: 10px solid #504F4C;
+	background-color: #504F4C;
+	color: #EBE4D7;
+	box-shadow: 2px 2px 5px black;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
