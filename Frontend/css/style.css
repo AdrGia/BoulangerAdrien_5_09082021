@@ -69,4 +69,19 @@ footer {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
+	text-shadow: 3px 3px 5px black;
+}
+
+ul {
+
+	display: flex;
+	flex-direction: column;
+	text-shadow: 3px 3px 5px black;
+}
+
+li {
+
+	list-style-type: none;
+	margin-top: 20px;
+
 }
