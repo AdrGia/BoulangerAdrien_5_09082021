@@ -7,12 +7,6 @@ body {
 	max-width: 1850px;
 }
 
-content {
-
-	
-}
-
-
 
 /* <<<< HEADER >>>> */
 
@@ -110,6 +104,25 @@ article {
 
 }
 
+.back {
+
+	display: flex;
+	justify-content: center;
+	margin-bottom: 150px;
+	margin-top: 250px;
+}
+
+.button-return {
+
+	border: 2px solid #504F4C;
+	background-color: #504F4C;
+	color: #EBE4D7;
+	padding: 15px;
+	text-shadow: 3px 3px 5px black;
+	font-size: 18px;
+	cursor: pointer;
+}
+
 
 
 /* <<<< FOOTER >>>> */
@@ -142,4 +155,36 @@ li {
 h4 {
 
 	cursor: pointer;
+}
+
+
+
+/* <<<< 750px >>>> */
+
+
+@media screen and (max-width: 750px){
+
+
+footer {
+
+	flex-direction: column;
+	align-items: center;
+}	
+
+li {
+
+	margin-right: 20px;
+}
+
+header {
+
+	flex-direction: column;
+	align-items: center;
+}
+
+.fa-shopping-cart {
+
+	display: none;
+}
+
 }

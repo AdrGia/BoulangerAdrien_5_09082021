@@ -1,17 +1,21 @@
-main()
+// Récupération des données de l'API //
 
-function main() {
-  const article = getArticle()
+const getCameras = async function(){
 }
-function getArticle(){
-  fetch("http://localhost:3000/api/cameras/posts")
-    .then(function(response){
-      return response.json()
+
+function getCamera() {
+
+  return fetch("https://localhost:3000/api/cameras")
+    .then(function(reponse){
+      return reponse.json()
     })
-    .then(function(article){
-      console.log(article)
+
+    .then(function(cameras){
+      return cameras
     })
+
     .catch(function(error){
       alert(error)
     })
 }
+
