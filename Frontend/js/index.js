@@ -32,7 +32,7 @@ const getCameras = async function() {
           camerasRef.appendChild(h4CamerasRef);
           h4CamerasRef.textContent = camera.name;
 
-          const pCamerasRef = document.createElement("p");
+          const pCamerasRef = document.createElement("span");
           camerasRef.appendChild(pCamerasRef);
           pCamerasRef.textContent = camera.price / 100 + "€";        
         }

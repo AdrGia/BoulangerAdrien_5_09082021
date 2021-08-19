@@ -84,13 +84,28 @@ img {
 
 }
 
-section {
+section a {
 
 	border: 5px solid #504F4C;
 	background-color: #504F4C;
 	color: #EBE4D7;
 	box-shadow: 2px 2px 5px black;
 	margin-bottom: 50px;
+	text-decoration: none;
+	
+}
+
+h4 {
+
+	margin-left: 10px;
+	text-shadow: 3px 3px 5px black;
+
+}
+
+span {
+
+	margin-left: 10px;
+	text-shadow: 3px 3px 5px black;
 }
 
 
