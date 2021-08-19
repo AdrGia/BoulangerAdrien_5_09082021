@@ -1,27 +1,50 @@
-// Récupération des données de l'API //
+const getCameras = async function() {
 
-async function article() {
-  const cameras = await getCameras()
+  try {
 
-  for (camera of cameras) {
-    diplayCameras(camera)
+    let response = await fetch("http://localhost:3000/api/cameras/");
+    if (response.ok) {
+        let cameras = await response.json();
+        console.log(cameras);
+
+        for (let camera of cameras) {
+          const article = document.getElementById("cameras");
+
+          const camerasSection = document.createElement("section");
+          article.appendChild(camerasSection);
+          camerasSection.className = "cameras";
+
+          const productLink = document.createElement("a");
+          productLink.href = "produit.html?id=" + camera._id;
+          camerasSection.appendChild(productLink);
+
+          const cameraImg = document.createElement("img");
+          productLink.appendChild(cameraImg);
+          cameraImg.setAttribute("src", camera.imageUrl);
+          cameraImg.setAttribute("alt", "Camera vintage" + camera.name);
+          cameraImg.setAttribute("title", "Camera vintage" + camera.name);
+
+          const camerasRef = document.createElement("div");
+          productLink.appendChild(camerasRef);
+          camerasRef.className = "cameras_ref";
+
+          const h4CamerasRef = document.createElement("h4");
+          camerasRef.appendChild(h4CamerasRef);
+          h4CamerasRef.textContent = camera.name;
+
+          const pCamerasRef = document.createElement("p");
+          camerasRef.appendChild(pCamerasRef);
+          pCamerasRef.textContent = camera.price / 100 + "€";        
+        }
+
+       } else {
+        console.error("Retour du serveur : ", response.status);
+        alert("Erreur rencontrée : " + response.status); 
+    }
+
+  } catch (error) {
+    alert("Erreur :" + error);
   }
 }
 
-fetch("http://localhost:3000/api/cameras")
-.then((response) => response.json())
-.then((cameras) => cameras)
-.catch((error) => { alert("Erreur de connexion avec le serveur")})
-
-
-function displayCameras(camera) {
-  const templateElt = document.getElementById("camera")
-  const cloneElt = document.importNode(templateElt.content, true)
-
-  cloneElt.getElementById("camerasLink")
-  cloneElt.getElementById("camerasImage").src = camera.imageUrl
-  cloneElt.getElementById("camerasName").textContent = camera.name
-  cloneElt.getElementById("camerasPrice").textContent = camera.price 
-  cloneElt.getElementById("camerasDescription").textContent = camera.description
-
-  document.getElementById("article").appendChild(cloneElt)
+getCameras();
