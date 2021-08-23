@@ -123,6 +123,7 @@ span {
 	border: 2px solid #504F4C;
 	background-color: #504F4C;
 	color: #EBE4D7;
+	box-shadow: 2px 2px 5px black;
 	padding: 15px;
 	text-shadow: 3px 3px 5px black;
 	font-size: 18px;
