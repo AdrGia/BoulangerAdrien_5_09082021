@@ -10,13 +10,10 @@ const getCameras = async function(){
     	if (response.ok) {
         let cameras = await response.json();
         console.log(camera);
-		
-		} else {
-        console.error("Retour du serveur : ", response.status);
-        alert("Erreur rencontrée : " + response.status); 
-    	} catch (error) {
+    	}	
+    }
+    catch (error) {
     	alert("Erreur :" + error);
-  	}
-}
-
-getCameras();
+    }
+	     
+}    	
