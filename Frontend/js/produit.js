@@ -28,15 +28,20 @@ const getCameras = async function(){
 
     	const cameraDivInfo = document.createElement("div");
     	page_product.appendChild(cameraDivInfo);
-    	cameraDivInfo.className = camera_info;
+    	cameraDivInfo.className = "camera_info";
 
       const cameraH4 = document.createElement("h4");
       page_product.appendChild(cameraH4);
-      cameraH4.className = "camera_h4";
+      cameraH4.className = "camera.name";
 
       const cameraP = document.createElement("p");
       page_product.appendChild(cameraP);
-      cameraP.textContent = "camera.name";
+      cameraP.textContent = "camera.description";
+
+      const cameraPrice = document.createElement("p");
+      page_product.appendChild(cameraPrice);
+      cameraPrice.textContent = "Son prix :" + camera.price / 100 + "€";
+
     }  
 
   }
