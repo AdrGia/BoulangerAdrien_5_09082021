@@ -59,7 +59,6 @@ const getCameras = async function(){
       select.setAttribute("name", "Choix de la lentille" + camera.name);
       select.setAttribute("id", "select_1" );
 
-
       let addCamera = document.createElement("button");
       form.appendChild(addCamera);
       addCamera.type = "submit";
