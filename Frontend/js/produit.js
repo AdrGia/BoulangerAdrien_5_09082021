@@ -47,7 +47,7 @@ const getCameras = async function(){
 
       const formDiv = document.createElement("div");
       form.appendChild(formDiv);
-      formDiv.className = "lens_name";
+      formDiv.className = "lenses_name";
 
       const label = document.createElement("label");
       formDiv.appendChild(label);
@@ -64,7 +64,16 @@ const getCameras = async function(){
       addCamera.type = "submit";
       addCamera.name = "add";
       addCamera.id = "submit";
-      addCamera.textContent = "Ajouter au panier"
+      addCamera.textContent = "Ajouter au panier";
+
+      const lenses = camera.lenses;
+
+      for (i = 0; i < lenses.length; i++) {
+        const selectOption = document.createElement("option");
+        select.appendChild(selectOption);
+        selectOption.textContent = lenses[i];
+        selectOption.setAttribute=("value", lenses[i]);
+      }
 
     }  
 
