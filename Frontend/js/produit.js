@@ -75,43 +75,41 @@ const getCameras = async function(){
         selectOption.setAttribute=("value", lenses[i]);
       }
 
-      addCamera.addEventListener("click" function(event) {
-        event.preventDefault();
+         addCamera.addEventListener("click", function (event) {
+                event.preventDefault();
 
-      let camerasPicked = {
-        cameraName: camera.name,
-        cameraId: camera._id,
-        cameraLenses: select.value,
-        quantity: 1,
-        cameraPrice: camera.price / 100, 
-      };
+                let camerasPicked = {
+                    cameraName: camera.name,
+                    cameraId: camera._id,
+                    cameraLenses: select.value,
+                    quantity: 1,
+                    cameraPrice: camera.price / 100,
+                };
+                console.log(camerasPicked);
 
-      console.log(camerasPicked);
-
-      let stockCameras = JSON.parse(localStorage.getItem("newArticle"));
-      const cameraLenses = selec.value;
-      if(stockCameras) {
-        stockCameras.push(camerasPicked);
-        localStorage.setItem("newArticle", JSON.stringify(stockCameras));
-        console.log(stockCameras);
-        if (window.confirm(camera.name + "" + camera.lenses + "a bien été ajouté. Souhaitez vous consulter votre panier ?")) {
-          window.location.href = "panier.html";
-        } else {
-          window.location.href = "index.html";
-        }
-      } else {
-        stockCameras = [];
-        stockCameras.push(camerasPicked);
-        localStorage.setItem("newArticle", JSON.stringify(stockCameras));
-        console.log(stockCameras);
-        if (window.confirm(camera.name + "" + cameraLenses + "a bien été ajouté. Souhaitez vous consulter votre panier ?")) {
-          window.location.href = "panier.html";
-        } else {
-          window.location.href = "index.html";
-        }
-      }
-
-    });  
+                let stockCameras = JSON.parse(localStorage.getItem('newArticle'));
+                const cameraLenses = select.value;
+                if(stockCameras) {
+                    stockCameras.push(camerasPicked);
+                    localStorage.setItem("newArticle", JSON.stringify(stockCameras));
+                    console.log(stockCameras);
+                    if (window.confirm(camera.name + " " + cameraLenses + ' a bien été ajouté. Souhaitez vous consulter votre panier ?')) { 
+                        window.location.href = "panier.html";
+                    } else {
+                        window.location.href = "index.html";
+                    }
+                } else {
+                    stockCameras = [];
+                    stockCameras.push(camerasPicked);
+                    localStorage.setItem('newArticle', JSON.stringify(stockCameras));
+                    console.log(stockCameras);
+                    if (window.confirm(cameras.name + " " + cameralenses + ' a bien été ajouté. Souhaitez vous consulter votre panier ?')) { 
+                        window.location.href = "panier.html";
+                    } else {
+                        window.location.href = "index.html";
+                    }
+                }
+            });
 
     }   else {
           console.error ("Retour du serveur :", reponse.status);
