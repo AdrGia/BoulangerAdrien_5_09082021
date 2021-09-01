@@ -45,4 +45,21 @@ if(stockCameras == nul || stockCamera.length === 0) {
 		delectButton.className = "delect_button";
 		delectButton.title = "Supprimer cet article";
 	};
+
+	let calculPrice = []
+	for (stockCamera of stockCameras) {
+		let article = stockCamera.cameraPrice;
+		calculPrice.push(article);
+	};
+
+	const reducer = (accumulator, currentValue) => accumulator + currentValue;
+	const totalPrice = calculPrice.reduce(reducer, 0);
+	console.log(totalPrice);
+
+	const total = document.createElement("p");
+	cameraDivBasket.appendChild(total);
+	total.className = "total";
+	total.textContent = "Le montant total :" + totalPrice + "€";
+
+	
 }
