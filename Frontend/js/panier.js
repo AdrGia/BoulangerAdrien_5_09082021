@@ -61,5 +61,145 @@ if(stockCameras == nul || stockCamera.length === 0) {
 	total.className = "total";
 	total.textContent = "Le montant total :" + totalPrice + "€";
 
+	const from = document.createElement("form");
+	form.className = "contact_form";
+	cameraDivBasket.appendChild(form);
+
+	const cameraH3bis = document.createElement("h3");
+	form.appendChild(cameraH3bis);
+	cameraH3bis.textContent = "Remplir ce formulaire pour valider votre commande : ";
+
+	function validName(value) {
+	 	return /^[A-Z-a-z\s]{3,40}$/.test(value);
+	};
+
+	function validAddress(value) {
+		return /^[A-Z-a-z-0-9\s]{5,80}$/.test(value);
+	};
+
+	function validMail(value) {
+		 return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+	};
+
+	const divFirstName = document.createElement("div");
+	form.appendChild(divFirstName);
+	divFirstName.className = "div_name";
+
+	const labelFirstName = document.createElement("label");
+	divFirstName.appendChild(labelFirstName);
+	labelFirstName.setAttribute("prénom");
+	labelFirstName.textContent = "Prénom";
+
+	const firstName = document.createElement("input");
+	divFirstName.appendChild(firstName);
+	firstName.setAttribute("type", "text");
+	firstName.setAttribute("class", "name");
+	firstName.name = "Prénom";
+	firstName.required = true;
+
+	firstName.addEventListener("change", function(event) {
+		if (validName(firstName.value)) {
+		} else {
+			alert("Aucun chiffre ou symbole n'est autorisé.")
+			event.preventDefault()
+		}
+	});
+
+	const divLastName = document.createElement("div");
+	form.appendChild(divLastName);
+	divLastName.className = "div_name";
+
+	const labelLastName = document.createElement("label");
+	divLastName.appendChild("labelLastName");
+	labelLastName.setAttribute("nom");
+	labelLastName.textContent = "Nom :";
+
+	const lastName = document.createElement("input");
+	divLastName.appendChild("lastName");
+	lastName.setAttribute("type", "text");
+	lastName.setAttribute("class", "name");
+	lastName.name = "Nom";
+	lastName.required = true;
+
+	lastName.addEventListener("change", function(event){
+		if (validName(lastName.value)) {
+		} else {
+			alert("Aucun chiffre ou symbole n'est autorisé.");
+			event.preventDefault()
+		}
+	});
+
+	const divAddress = document.createElement("div");
+	form.appendChild(divAddress);
+	divAddress.className = "div_name";
+
+	const labelAddress = document.createElement("label");
+	divAddress.appendChild(labelAddress);
+	labelAddress.setAttribute("adresse");
+	labelAddress.textContent = "Adresse";
+
+	const address = document.createElement("textarea");
+	divAddress.appendChild(address);
+	address.setAttribute("type", "text");
+	address.setAttribute("class", "name");
+	address.name = "Adresse";
+	address.required = true;
+
+	address.addEventListener("change", function(event){
+		if(validAddress(address.value)){
+		} else {
+			alert("Aucun symbole n'est autorisé.");
+			event.preventDefault()
+		}
+	});
+
+	const divCity = document.createElement("div");
+	form.appendChild(divCity);
+	divCity.className = "div_city";
+
+	const labelCity = document.createElement("label");
+	divCity.appendChild(labelCity);
+	labelCity.setAttribute("ville");
+	labelCity.textContent ="Ville";
+
+	const city = document.createElement("input");
+	divCity.appendChild(city);
+	city.setAttribute("type", "text");
+	city.setAttribute("class", "name");
+	city.name = "Ville";
+	city.required = true;
+
+	city.addEventListener("change", function(event){
+		if(validName(city.value)) {
+		} else {
+			alert("Aucun chiffre ou symbole n'est autorisé.");
+			event.preventDefault()
+		}
+	});
+
+	const divMail = document.createElement("div");
+	form.appendChild(divMail);
+	divMail.className = "div_mail";
+
+	const labelMail = document.createElement("label");
+	divMail.appendChild(labelMail);
+	labelMail.setAttribute("email");
+	labelMail.textContent = "Adresse mail :";
+
+	const mail = document.createElement("input");
+	divMail.appendChild(mail);
+	mail.setAttribute("type", "text");
+	mail.setAttribute("class", "name");
+	mail.name = "Adresse mail";
+	mail.required = true;
+
+	mail.addEventListener("change", function(event) {
+		if(validMail(mail.value)) {
+		} else {
+			alert("Saisir une adresse mail valide, exemple : adr@mail.com.");
+			event.preventDefault()
+		}
+	});
+
 	
-}
+}	
