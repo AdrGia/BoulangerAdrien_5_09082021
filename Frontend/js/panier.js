@@ -201,5 +201,36 @@ if(stockCameras == nul || stockCamera.length === 0) {
 		}
 	});
 
-	
+	const divValid = document.createElement("div");
+	form.appendChild(divValid);
+	divValid.className = "div_name";
+
+	let valid = document.createElement("button");
+	divValid.appendChild(valid);
+	valid.type = "submit";
+	valid.name = "add";
+	valid.id = "valid";
+	valid.textContent = "Valider votre commande";
+
+	valid.addEventListener("click", function(event) {
+		if(validName(firstName.value) && validName(lastName.value) && validAddress(address.value) && validName(city.value) && validMail(mail.value)) {
+			event.preventDefault();
+
+			localStorage.setItem("totalPrice", "totalPrice");
+			const storagePrice = localStorage.getItem("totalPrice");
+			console.log(storagePrice);
+
+			let contact = {
+				firstName: firstName.value;
+				lastName: lastName.value;
+				address: address.value;
+				city: city.value;
+				mail: mail.value;
+			}
+
+			console.log(contact);
+
+			
+		}
+	})
 }	
