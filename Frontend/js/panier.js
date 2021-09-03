@@ -230,7 +230,40 @@ if(stockCameras == nul || stockCamera.length === 0) {
 
 			console.log(contact);
 
-			
+			let products = [];
+			for (stockCamera of stockCameras) {
+				let productsId = stockCamera.cameraId;
+				products.push(productsId);
+			}
+
+			console.log(products);
+
+			const post = async function(data) {
+
+				try {
+					let reponse = await fetch("http://localhost:3000/api/cameras/order", {
+						method: "POST",
+						body: JSON.stringify(data),
+						headers: {
+							"Content-Type": "application/json"
+						}
+
+					});
+					if(response.ok) {
+						let data = await response.json();
+						console.log(data.orderId);
+						localStorage.setItem("responseOrder", data.orderId);
+						window.location = "confirmation.html";
+						localStorage.removeItem("newArticle");
+					} else {
+						event.preventDefault();
+						console.error("Retour du serveur: ", response.status);
+						alert("Erreur rencontrée :" + response.status);
+					}
+				} catch (error) {
+					alert("Erreur :" + error);
+				}
+			};
 		}
-	})
-}	
+	});
+};	
