@@ -4,7 +4,7 @@ console.log(stockCameras);
 
 const article = document.getElementById("page_product");
 const cameraDiv = document.createElement("div");
-article.appendChild("cameraDiv");
+page_product.appendChild("cameraDiv");
 cameraDiv.className = "camera_ref";
 
 const cameraDivBasket = document.createElement("div");
@@ -221,12 +221,12 @@ if(stockCameras == nul || stockCamera.length === 0) {
 			console.log(storagePrice);
 
 			let contact = {
-				firstName: firstName.value;
-				lastName: lastName.value;
-				address: address.value;
-				city: city.value;
-				mail: mail.value;
-			}
+                firstName: firstName.value,
+                lastName: lastName.value,
+                address: address.value,
+                city: city.value,
+                email: mail.value,
+            }
 
 			console.log(contact);
 
@@ -237,6 +237,11 @@ if(stockCameras == nul || stockCamera.length === 0) {
 			}
 
 			console.log(products);
+
+			let send = {
+				contact,
+				products,
+			}
 
 			const post = async function(data) {
 
@@ -264,6 +269,8 @@ if(stockCameras == nul || stockCamera.length === 0) {
 					alert("Erreur :" + error);
 				}
 			};
+
+			post(send);
 		}
 	});
 };	
