@@ -4,7 +4,7 @@ console.log(stockCameras);
 
 const article = document.getElementById("page_product");
 const cameraDiv = document.createElement("div");
-page_product.appendChild("cameraDiv");
+page_product.appendChild(cameraDiv);
 cameraDiv.className = "camera_ref";
 
 const cameraDivBasket = document.createElement("div");
@@ -12,10 +12,11 @@ cameraDiv.appendChild(cameraDivBasket);
 cameraDivBasket.className = "camera_basket";
 
 const cameraH3 = document.createElement("h3");
-cameraDivBasket.appendChild("cameraH3");
+cameraDivBasket.appendChild(cameraH3);
 cameraH3.textContent = "Votre commande :";
 
-if(stockCameras == nul || stockCamera.length === 0) {
+if(stockCameras == null || stockCameras.length === 0){
+
 	const blankBasket = document.createElement("p");
 	cameraDivBasket.appendChild(blankBasket);
 	blankBasket.className = "blank_basket";
@@ -44,6 +45,26 @@ if(stockCameras == nul || stockCamera.length === 0) {
 		cameraPrice.appendChild(delectButton);
 		delectButton.className = "delect_button";
 		delectButton.title = "Supprimer cet article";
+
+		const iconDelectButton = document.createElement("i");
+		delectButton.appendChild(iconDelectButton);
+		iconDelectButton.clasName = "fas fa-trash-alt";
+	};
+
+	let delectButton = document.getElementsByClassName("delectButton");
+	for (let i = 0; i < delectButton.length; i ++) {
+		delectButton[i].addEventListener("click", function(event){
+			event.preventDefault();
+			let id = this.closest('.camera_price').id;
+
+			stockCameras.splice(id, 1);
+
+			localStorage.setItem("newArticle", JSON.stringify(stockCameras));
+			JSON.parse(localStorage.getItem("newArticle"));
+
+			alert("Cet article a été supprimé.");
+			window.location.href = "panier.html";
+		});
 	};
 
 	let calculPrice = []
@@ -61,7 +82,7 @@ if(stockCameras == nul || stockCamera.length === 0) {
 	total.className = "total";
 	total.textContent = "Le montant total :" + totalPrice + "€";
 
-	const from = document.createElement("form");
+	const form = document.createElement("form");
 	form.className = "contact_form";
 	cameraDivBasket.appendChild(form);
 
@@ -87,8 +108,8 @@ if(stockCameras == nul || stockCamera.length === 0) {
 
 	const labelFirstName = document.createElement("label");
 	divFirstName.appendChild(labelFirstName);
-	labelFirstName.setAttribute("prénom");
-	labelFirstName.textContent = "Prénom";
+	labelFirstName.setAttribute("for", "prénom");
+	labelFirstName.textContent = "Prénom : ";
 
 	const firstName = document.createElement("input");
 	divFirstName.appendChild(firstName);
@@ -110,12 +131,12 @@ if(stockCameras == nul || stockCamera.length === 0) {
 	divLastName.className = "div_name";
 
 	const labelLastName = document.createElement("label");
-	divLastName.appendChild("labelLastName");
-	labelLastName.setAttribute("nom");
-	labelLastName.textContent = "Nom :";
+	divLastName.appendChild(labelLastName);
+	labelLastName.setAttribute("for", "nom");
+	labelLastName.textContent = "Nom : ";
 
 	const lastName = document.createElement("input");
-	divLastName.appendChild("lastName");
+	divLastName.appendChild(lastName);
 	lastName.setAttribute("type", "text");
 	lastName.setAttribute("class", "name");
 	lastName.name = "Nom";
@@ -135,8 +156,8 @@ if(stockCameras == nul || stockCamera.length === 0) {
 
 	const labelAddress = document.createElement("label");
 	divAddress.appendChild(labelAddress);
-	labelAddress.setAttribute("adresse");
-	labelAddress.textContent = "Adresse";
+	labelAddress.setAttribute("for", "adresse");
+	labelAddress.textContent = "Adresse : ";
 
 	const address = document.createElement("textarea");
 	divAddress.appendChild(address);
@@ -159,8 +180,8 @@ if(stockCameras == nul || stockCamera.length === 0) {
 
 	const labelCity = document.createElement("label");
 	divCity.appendChild(labelCity);
-	labelCity.setAttribute("ville");
-	labelCity.textContent ="Ville";
+	labelCity.setAttribute("for","ville");
+	labelCity.textContent ="Ville : ";
 
 	const city = document.createElement("input");
 	divCity.appendChild(city);
@@ -183,7 +204,7 @@ if(stockCameras == nul || stockCamera.length === 0) {
 
 	const labelMail = document.createElement("label");
 	divMail.appendChild(labelMail);
-	labelMail.setAttribute("email");
+	labelMail.setAttribute("for", "email");
 	labelMail.textContent = "Adresse mail :";
 
 	const mail = document.createElement("input");
