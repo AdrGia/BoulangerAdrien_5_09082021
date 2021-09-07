@@ -156,6 +156,25 @@ button {
 
 }
 
+.div_name {
+
+	margin-bottom: 40px;
+	display: flex;
+	justify-content: center;
+
+}
+
+.name {
+
+	background-color: #EBE4D7;
+	width: 30%;
+	margin-left: 5px;
+	font-family: 'Courier Prime', monospace;
+	font-size: 18px;
+
+}
+
+
 
 
 /* <<<< FOOTER >>>> */
@@ -219,6 +238,11 @@ header {
 .fa-shopping-cart {
 
 	display: none;
+}
+
+.name {
+
+	width: 50%;
 }
 
 

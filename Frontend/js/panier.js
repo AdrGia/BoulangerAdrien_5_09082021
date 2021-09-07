@@ -159,7 +159,7 @@ if(stockCameras == null || stockCameras.length === 0){
 	labelAddress.setAttribute("for", "adresse");
 	labelAddress.textContent = "Adresse : ";
 
-	const address = document.createElement("textarea");
+	const address = document.createElement("input");
 	divAddress.appendChild(address);
 	address.setAttribute("type", "text");
 	address.setAttribute("class", "name");
@@ -176,7 +176,7 @@ if(stockCameras == null || stockCameras.length === 0){
 
 	const divCity = document.createElement("div");
 	form.appendChild(divCity);
-	divCity.className = "div_city";
+	divCity.className = "div_name";
 
 	const labelCity = document.createElement("label");
 	divCity.appendChild(labelCity);
@@ -200,12 +200,12 @@ if(stockCameras == null || stockCameras.length === 0){
 
 	const divMail = document.createElement("div");
 	form.appendChild(divMail);
-	divMail.className = "div_mail";
+	divMail.className = "div_name";
 
 	const labelMail = document.createElement("label");
 	divMail.appendChild(labelMail);
 	labelMail.setAttribute("for", "email");
-	labelMail.textContent = "Adresse mail :";
+	labelMail.textContent = "Adresse mail : ";
 
 	const mail = document.createElement("input");
 	divMail.appendChild(mail);
