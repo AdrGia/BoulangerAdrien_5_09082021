@@ -44,11 +44,11 @@ if(stockCameras == null || stockCameras.length === 0){
 		const delectButton = document.createElement("button");
 		cameraPrice.appendChild(delectButton);
 		delectButton.className = "delect_button";
-		delectButton.title = "Supprimer cet article";
+		delectButton.textContent = "Supprimer cet article ";
 
 		const iconDelectButton = document.createElement("i");
 		delectButton.appendChild(iconDelectButton);
-		iconDelectButton.clasName = "fas fa-trash-alt";
+		iconDelectButton.className = "fas fa-trash-alt";
 	};
 
 	let delectButton = document.getElementsByClassName("delectButton");
@@ -81,6 +81,28 @@ if(stockCameras == null || stockCameras.length === 0){
 	cameraDivBasket.appendChild(total);
 	total.className = "total";
 	total.textContent = "Le montant total :" + totalPrice + "€";
+
+	const suppress = document.createElement("button");
+	cameraDivBasket.appendChild(suppress);
+	suppress.className = "icon_suppress";
+
+	const basketLink = document.createElement("a");
+	suppress.appendChild(basketLink);
+	basketLink.href = "panier.html";
+	basketLink.id = "basket_link";
+	basketLink.title = "Vider le panier";
+	basketLink.textContent = "Vider mon panier ";
+
+	const icon = document.createElement("i");
+	basketLink.appendChild(icon);
+	icon.className = "fas fa-trash-alt";
+
+	suppress.addEventListener("click", function(event){
+		event.preventDefault();
+		localStorage.removeItem("newArticle");
+		alert("Votre panier est vide ! ");
+		window.location.href = "panier.html";
+	});
 
 	const form = document.createElement("form");
 	form.className = "contact_form";
