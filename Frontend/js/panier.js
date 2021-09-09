@@ -44,28 +44,27 @@ if(stockCameras == null || stockCameras.length === 0){
 		const delectButton = document.createElement("button");
 		cameraPrice.appendChild(delectButton);
 		delectButton.className = "delect_button";
-		delectButton.textContent = "Supprimer cet article ";
 
 		const iconDelectButton = document.createElement("i");
 		delectButton.appendChild(iconDelectButton);
 		iconDelectButton.className = "fas fa-trash-alt";
 	};
 
-	let delectButton = document.getElementsByClassName("delectButton");
-	for (let i = 0; i < delectButton.length; i ++) {
-		delectButton[i].addEventListener("click", function(event){
-			event.preventDefault();
-			let id = this.closest('.camera_price').id;
+	  let delectButton = document.getElementsByClassName("delect_button");
+    for (let i = 0 ; i < delectButton.length; i++) {
+        delectButton[i].addEventListener("click" , function (event) { 
+            event.preventDefault();
+            let id = this.closest(".camera_price").id;
 
-			stockCameras.splice(id, 1);
+            stockCameras.splice(id, 1);
 
-			localStorage.setItem("newArticle", JSON.stringify(stockCameras));
-			JSON.parse(localStorage.getItem("newArticle"));
+            localStorage.setItem('newArticle', JSON.stringify(stockCameras));
+            JSON.parse(localStorage.getItem('newArticle'));
 
-			alert("Cet article a été supprimé.");
-			window.location.href = "panier.html";
-		});
-	};
+            alert('Cet article a bien été supprimé !');
+            window.location.href = "panier.html";   
+        }); 
+    };
 
 	let calculPrice = []
 	for (stockCamera of stockCameras) {
@@ -80,7 +79,7 @@ if(stockCameras == null || stockCameras.length === 0){
 	const total = document.createElement("p");
 	cameraDivBasket.appendChild(total);
 	total.className = "total";
-	total.textContent = "Le montant total :" + totalPrice + "€";
+	total.textContent = "Le montant total : " + totalPrice + "€";
 
 	const suppress = document.createElement("button");
 	cameraDivBasket.appendChild(suppress);
@@ -306,7 +305,7 @@ if(stockCameras == null || stockCameras.length === 0){
 					} else {
 						event.preventDefault();
 						console.error("Retour du serveur: ", response.status);
-						alert("Erreur rencontrée :" + response.status);
+						alert("Erreur rencontrée : " + response.status);
 					}
 				} catch (error) {
 					alert("Erreur :" + error);

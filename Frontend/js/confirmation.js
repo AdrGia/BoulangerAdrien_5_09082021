@@ -20,7 +20,7 @@ cameraP.textContent = "Nous avons le plaisir de vous informer que votre commande
 
 const cameraP2 = document.createElement("p");
 cameraDiv.appendChild(cameraP2);
-cameraP2.textContent = "Votre commande arrive bientôt chez vous, vous trouverez ci-dessous le récapitulatif de votre comande.";
+cameraP2.innerHTML = "Votre commande arrive bientôt chez vous.<br /> Vous trouverez ci-dessous le récapitulatif de votre comande.";
 
 const cameraP3 = document.createElement("p");
 cameraDiv.appendChild(cameraP3);
