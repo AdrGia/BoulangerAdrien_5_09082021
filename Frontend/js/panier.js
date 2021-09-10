@@ -258,7 +258,7 @@ if(stockCameras == null || stockCameras.length === 0){
 		if(validName(firstName.value) && validName(lastName.value) && validAddress(address.value) && validName(city.value) && validMail(mail.value)) {
 			event.preventDefault();
 
-			localStorage.setItem("totalPrice", "totalPrice");
+			localStorage.setItem("totalPrice", totalPrice);
 			const storagePrice = localStorage.getItem("totalPrice");
 			console.log(storagePrice);
 
@@ -275,7 +275,7 @@ if(stockCameras == null || stockCameras.length === 0){
 			let products = [];
 			for (stockCamera of stockCameras) {
 				let productsId = stockCamera.cameraId;
-				products.push(productsId);
+				products.push((productsId));
 			}
 
 			console.log(products);
@@ -285,10 +285,12 @@ if(stockCameras == null || stockCameras.length === 0){
 				products,
 			}
 
+			console.log(send);
+
 			const post = async function(data) {
 
 				try {
-					let reponse = await fetch("http://localhost:3000/api/cameras/order", {
+					let response = await fetch("http://localhost:3000/api/cameras/order", {
 						method: "POST",
 						body: JSON.stringify(data),
 						headers: {
