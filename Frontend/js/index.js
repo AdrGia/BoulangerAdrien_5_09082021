@@ -1,13 +1,17 @@
-const getCameras = async function() {
 
-  try {
 
-    let response = await fetch("http://localhost:3000/api/cameras/");
-    if (response.ok) {
-        let cameras = await response.json();
-        console.log(cameras);
 
-        for (let camera of cameras) {
+const cameras = async() => {
+  response = await fetch('http://localhost:3000/api/cameras/');
+  return response.json();
+}
+
+const displayListing = (cameras) => {
+  if(cameras.length === 0) {
+    console.error("Data is empty!");
+    return;
+  }
+  for (let camera of cameras) {
           const article = document.getElementById("cameras");
 
           const camerasSection = document.createElement("section");
@@ -35,16 +39,6 @@ const getCameras = async function() {
           const pCamerasRef = document.createElement("span");
           camerasRef.appendChild(pCamerasRef);
           pCamerasRef.textContent = camera.price / 100 + "€";        
-        }
-
-       } else {
-        console.error("Retour du serveur : ", response.status);
-        alert("Erreur rencontrée : " + response.status); 
-    }
-
-  } catch (error) {
-    alert("Erreur :" + error);
   }
 }
 
-getCameras();

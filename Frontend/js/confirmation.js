@@ -8,7 +8,7 @@ console.log(totalPrice);
 const article = document.getElementById("page_product");
 const cameraDiv = document.createElement("div");
 article.appendChild(cameraDiv);
-cameraDiv.clasName = "camera_confirm";
+cameraDiv.className = "camera_confirm";
 
 const cameraH3 = document.createElement("h3");
 cameraDiv.appendChild(cameraH3);
@@ -37,11 +37,11 @@ cameraH3Bis.textContent = "Récapitulatif de la commande : ";
 const cameraP5 = document.createElement("p");
 cameraDivConfirm.appendChild(cameraP5);
 cameraP5.textContent = "Numéro de commande : " + orderId;
-cameraP5.clasName = "confirm_p";
+cameraP5.className = "confirm_p";
 
 const cameraP6 = document.createElement("p");
 cameraDivConfirm.appendChild(cameraP6);
 cameraP6.textContent = "Montant total de la commande : " + totalPrice + "€";
-cameraP6.clasName = "confirm_p";
+cameraP6.className = "confirm_p";
 
 localStorage.clear();

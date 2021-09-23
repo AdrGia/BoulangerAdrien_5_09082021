@@ -1,34 +1,31 @@
-
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
 console.log(id);
 
-const getCameras = async function(){
 
-	try {
+const request = async (urlRequest) => {
+  response = await fetch(urlRequest + id);
+  return response.json();
+}
 
-		let response = await fetch("http://localhost:3000/api/cameras/" + id);
+const createTpl = (camera) => {
 
-    	if (response.ok) {
-        let camera = await response.json();
-        console.log(camera);
-    	
-      const article = document.getElementById("page_product");
+     const article = document.getElementById("page_product");
 
-    	const cameraDiv = document.createElement("div");
-    	page_product.appendChild(cameraDiv);
-    	cameraDiv.className = "camera_ref";
+      const cameraDiv = document.createElement("div");
+      page_product.appendChild(cameraDiv);
+      cameraDiv.className = "camera_ref";
 
-    	const cameraImg2 = document.createElement("img");
-    	page_product.appendChild(cameraImg2);
-    	cameraImg2.setAttribute("src", camera.imageUrl);
-    	cameraImg2.setAttribute("alt", "Caméra vintage" + camera.name);
-    	cameraImg2.setAttribute("title", "Caméra vintage" + camera.name);
+      const cameraImg2 = document.createElement("img");
+      page_product.appendChild(cameraImg2);
+      cameraImg2.setAttribute("src", camera.imageUrl);
+      cameraImg2.setAttribute("alt", "Caméra vintage" + camera.name);
+      cameraImg2.setAttribute("title", "Caméra vintage" + camera.name);
 
-    	const cameraDivInfo = document.createElement("div");
-    	page_product.appendChild(cameraDivInfo);
-    	cameraDivInfo.className = "camera_info";
+      const cameraDivInfo = document.createElement("div");
+      page_product.appendChild(cameraDivInfo);
+      cameraDivInfo.className = "camera_info";
 
       const cameraH4 = document.createElement("h4");
       page_product.appendChild(cameraH4);
@@ -42,7 +39,7 @@ const getCameras = async function(){
       page_product.appendChild(cameraPrice);
       cameraPrice.textContent = "Son prix : " + camera.price / 100 + "€";
 
-      const form = document.createElement("form");
+     const form = document.createElement("form");
       page_product.appendChild(form);
 
       const formDiv = document.createElement("div");
@@ -65,8 +62,9 @@ const getCameras = async function(){
       addCamera.name = "add";
       addCamera.id = "submit";
       addCamera.textContent = "Ajouter au panier";
+}
+      const createTpl2 = (lenses) => {
 
-      const lenses = camera.lenses;
 
       for (i = 0; i < lenses.length; i++) {
         const selectOption = document.createElement("option");
@@ -74,8 +72,9 @@ const getCameras = async function(){
         selectOption.textContent = lenses[i];
         selectOption.setAttribute=("value", lenses[i]);
       }
+}
 
-         addCamera.addEventListener("click", function (event) {
+addCamera.addEventListener("click", function (event) {
                 event.preventDefault();
 
                 let camerasPicked = {
@@ -109,18 +108,4 @@ const getCameras = async function(){
                         window.location.href = "index.html";
                     }
                 }
-            });
-
-    }   else {
-          console.error ("Retour du serveur :", reponse.status);
-          alert ("Erreur :" + response.status);
-    }
-
-  }
-    catch (error) {
-    	alert("Erreur :" + error);
-    }
-	     
-};
-
-getCameras();    	
+});
