@@ -15,6 +15,7 @@ const cameraH3 = document.createElement("h3");
 cameraDivBasket.appendChild(cameraH3);
 cameraH3.textContent = "Votre commande :";
 
+
 if(stockCameras == null || stockCameras.length === 0){
 
     const blankBasket = document.createElement("p");
@@ -253,7 +254,7 @@ const divFirstName = document.createElement("div");
 
 }    
 
-const createTpl = () => {
+const createTpl = (send) => {
 
     const divValid = document.createElement("div");
     form.appendChild(divValid);
@@ -300,31 +301,32 @@ const createTpl = () => {
             console.log(send);
 
 
-            const post = async function(data) {
+const post = async function(data) => {
 
-                try {
-                    let response = await fetch("http://localhost:3000/api/cameras/order", {
-                        method: "POST",
-                        body: JSON.stringify(data),
-                        headers: {
+     try {
+             let response = await fetch("urlRequest" + order, {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
                             "Content-Type": "application/json"
-                        }
-
-                    });
-                    if(response.ok) {
-                        let data = await response.json();
-                        console.log(data.orderId);
-                        localStorage.setItem("responseOrder", data.orderId);
-                        window.location = "confirmation.html";
-                        localStorage.removeItem("newArticle");
-                    } else {
-                        event.preventDefault();
-                        console.error("Retour du serveur: ", response.status);
-                        alert("Erreur rencontrée : " + response.status);
-                    }
-                } catch (error) {
-                    alert("Erreur :" + error);
                 }
-            };
 
-            post(send);
+            });
+                if(response.ok) {
+                    let data = await response.json();
+                     console.log(data.orderId);
+                    localStorage.setItem("responseOrder", data.orderId);
+                    window.location = "confirmation.html";
+                    localStorage.removeItem("newArticle");
+                 } else {
+                     event.preventDefault();
+                    console.error("Retour du serveur: ", response.status);
+                    alert("Erreur rencontrée : " + response.status);
+                }
+            } catch (error) {
+                alert("Erreur :" + error);
+            }
+    };  
+}; 
+
+post(send);   

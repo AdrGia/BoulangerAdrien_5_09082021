@@ -1,13 +1,13 @@
+
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
-console.log(id);
 
 
 const request = async (urlRequest) => {
-  response = await fetch(urlRequest + id);
+  response = await fetch("urlRequest" + id);
   return response.json();
-}
+};
 
 const createTpl = (camera) => {
 
@@ -62,8 +62,8 @@ const createTpl = (camera) => {
       addCamera.name = "add";
       addCamera.id = "submit";
       addCamera.textContent = "Ajouter au panier";
-}
-      const createTpl2 = (lenses) => {
+};
+      const createSelect = (lenses) => {
 
 
       for (i = 0; i < lenses.length; i++) {
@@ -72,40 +72,32 @@ const createTpl = (camera) => {
         selectOption.textContent = lenses[i];
         selectOption.setAttribute=("value", lenses[i]);
       }
-}
+};
 
-addCamera.addEventListener("click", function (event) {
-                event.preventDefault();
 
-                let camerasPicked = {
-                    cameraName: camera.name,
-                    cameraId: camera._id,
-                    cameraLenses: select.value,
-                    quantity: 1,
-                    cameraPrice: camera.price / 100,
-                };
-                console.log(camerasPicked);
+document.addEventListener("DOMContentLoaded", (event)  => {
+  
+  let urlReload = "index.html";
+  const addCamera = document.querySelector("#submit");
+  const basket = (JSON.parse(localStorage.getItem('newArticle')) ?? []);
+  
+  
+  addCamera.addEventListener("click", function (event) {
+      event.preventDefault();
+      let camerasPicked = {
+        cameraName: camera.name,
+        cameraId: camera._id,
+        cameraLenses: select.value,
+        quantity: 1,
+        cameraPrice: camera.price / 100,
+      };
 
-                let stockCameras = JSON.parse(localStorage.getItem('newArticle'));
-                const cameraLenses = select.value;
-                if(stockCameras) {
-                    stockCameras.push(camerasPicked);
-                    localStorage.setItem("newArticle", JSON.stringify(stockCameras));
-                    console.log(stockCameras);
-                    if (window.confirm(camera.name + " " + cameraLenses + ' a bien été ajouté. Souhaitez vous consulter votre panier ?')) { 
-                        window.location.href = "panier.html";
-                    } else {
-                        window.location.href = "index.html";
-                    }
-                } else {
-                    stockCameras = [];
-                    stockCameras.push(camerasPicked);
-                    localStorage.setItem('newArticle', JSON.stringify(stockCameras));
-                    console.log(stockCameras);
-                    if (window.confirm(cameras.name + " " + cameralenses + ' a bien été ajouté. Souhaitez vous consulter votre panier ?')) { 
-                        window.location.href = "panier.html";
-                    } else {
-                        window.location.href = "index.html";
-                    }
-                }
+      
+      if(confirmProduct(camerasPicked)) {
+        urlReload = "panier.html";
+        addBasket(camerasPicked, basket);
+      }
+
+      location.reload = urlReload;
+  });
 });
