@@ -129,7 +129,7 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
          return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
     };
 
-const createTpl = () => {
+const createTpl = (contact_details) => {
 
 
 const divFirstName = document.createElement("div");
@@ -148,14 +148,6 @@ const divFirstName = document.createElement("div");
     firstName.name = "Prénom";
     firstName.required = true;
 
-    firstName.addEventListener("change", function(event) {
-        if (validName(firstName.value)) {
-        } else {
-            alert("Aucun chiffre ou symbole n'est autorisé.")
-            event.preventDefault()
-        }
-    });
-
     const divLastName = document.createElement("div");
     form.appendChild(divLastName);
     divLastName.className = "div_name";
@@ -171,14 +163,6 @@ const divFirstName = document.createElement("div");
     lastName.setAttribute("class", "name");
     lastName.name = "Nom";
     lastName.required = true;
-
-    lastName.addEventListener("change", function(event){
-        if (validName(lastName.value)) {
-        } else {
-            alert("Aucun chiffre ou symbole n'est autorisé.");
-            event.preventDefault()
-        }
-    });
 
     const divAddress = document.createElement("div");
     form.appendChild(divAddress);
@@ -196,14 +180,6 @@ const divFirstName = document.createElement("div");
     address.name = "Adresse";
     address.required = true;
 
-    address.addEventListener("change", function(event){
-        if(validAddress(address.value)){
-        } else {
-            alert("Aucun symbole n'est autorisé.");
-            event.preventDefault()
-        }
-    });
-
     const divCity = document.createElement("div");
     form.appendChild(divCity);
     divCity.className = "div_name";
@@ -219,14 +195,6 @@ const divFirstName = document.createElement("div");
     city.setAttribute("class", "name");
     city.name = "Ville";
     city.required = true;
-
-    city.addEventListener("change", function(event){
-        if(validName(city.value)) {
-        } else {
-            alert("Aucun chiffre ou symbole n'est autorisé.");
-            event.preventDefault()
-        }
-    });
 
     const divMail = document.createElement("div");
     form.appendChild(divMail);
@@ -244,17 +212,8 @@ const divFirstName = document.createElement("div");
     mail.name = "Adresse mail";
     mail.required = true;
 
-    mail.addEventListener("change", function(event) {
-        if(validMail(mail.value)) {
-        } else {
-            alert("Saisir une adresse mail valide, exemple : adr@mail.com.");
-            event.preventDefault()
-        }
-    });
 
-}    
-
-const createTpl = (send) => {
+};    
 
     const divValid = document.createElement("div");
     form.appendChild(divValid);
@@ -267,44 +226,37 @@ const createTpl = (send) => {
     valid.id = "valid";
     valid.textContent = "Valider votre commande";
 
-    valid.addEventListener("click", function(event) {
-        if(validName(firstName.value) && validName(lastName.value) && validAddress(address.value) && validName(city.value) && validMail(mail.value)) {
-            event.preventDefault();
+const createSelect = (send) => {
 
-            localStorage.setItem("totalPrice", totalPrice);
-            const storagePrice = localStorage.getItem("totalPrice");
-            console.log(storagePrice);
+    try {
 
-            let contact = {
-                firstName: firstName.value,
-                lastName: lastName.value,
-                address: address.value,
-                city: city.value,
-                email: mail.value,
-            }
+    valid.addEventListener('click', ((event) => {
+    if(validName(firstName.value) && validName(lastName.value) && validAddress(address.value) && validName(city.value) && validMail(mail.value)) {
+     event.preventDefault();
+    localStorage.setItem("totalPrice", totalPrice);
+   const storagePrice = localStorage.getItem("totalPrice");
+   console.log(storagePrice);
 
-            console.log(contact);
+  const contact = checkContact();
+  const products = checkProducts();
+  const send = checkSend();
+  post(send).then((data) =>{
+    redirect(data);
 
-            let products = [];
-            for (stockCamera of stockCameras) {
-                let productsId = stockCamera.cameraId;
-                products.push((productsId));
-            }
+  })
 
-            console.log(products);
+  };
 
-            let send = {
-                contact,
-                products,
-            }
-}
-            console.log(send);
+})
 
+} catch(error) {
+    console.error(error);
+};     
 
 const post = async function(data) => {
 
      try {
-             let response = await fetch("urlRequest" + order, {
+             const request = ("http://localhost:3000/api/cameras/" + order, {
                 method: "POST",
                 body: JSON.stringify(data),
                 headers: {

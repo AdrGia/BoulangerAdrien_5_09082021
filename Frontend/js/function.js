@@ -1,7 +1,9 @@
 
 
-const cameras = request("http://localhost:3000/api/cameras/");
-displayListing(cameras);
+const request = async (urlApi) => {
+  response = await fetch(urlApi);
+  return response.json();
+}
 
 
 const addBasket = (camerasPicked, ...basket) => {
@@ -21,4 +23,24 @@ const confirmProduct = (camerasPicked) => {
   const select = document.querySelector("#select_1");
   const message = `${camerasPicked.name} ${select.value} a bien été ajouté. Souhaitez vous consulter votre panier ?`;
   return window.confirm(message);
+}
+
+const checkContact = {
+                firstName: firstName.value,
+                lastName: lastName.value,
+                address: address.value,
+                city: city.value,
+                email: mail.value,
+            }
+
+ const checkProducts = [];
+            for (stockCamera of stockCameras) {
+                let productsId = stockCamera.cameraId;
+                products.push((productsId));
+            }
+
+const checkSend = {
+
+                checkContact,
+                checkProducts,
 }

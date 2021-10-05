@@ -4,10 +4,12 @@ const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
 
 
-const request = async (urlRequest) => {
-  response = await fetch("urlRequest" + id);
+const cameras = async () => {
+  response = await fetch("http://localhost:3000/api/cameras/" + id);
   return response.json();
 };
+
+
 
 const createTpl = (camera) => {
 
@@ -62,7 +64,7 @@ const createTpl = (camera) => {
       addCamera.name = "add";
       addCamera.id = "submit";
       addCamera.textContent = "Ajouter au panier";
-};
+}
       const createSelect = (lenses) => {
 
 
@@ -72,7 +74,7 @@ const createTpl = (camera) => {
         selectOption.textContent = lenses[i];
         selectOption.setAttribute=("value", lenses[i]);
       }
-};
+}
 
 
 document.addEventListener("DOMContentLoaded", (event)  => {
@@ -81,8 +83,9 @@ document.addEventListener("DOMContentLoaded", (event)  => {
   const addCamera = document.querySelector("#submit");
   const basket = (JSON.parse(localStorage.getItem('newArticle')) ?? []);
   
-  
-  addCamera.addEventListener("click", function (event) {
+});
+
+  document.addEventListener("click", function (event) {
       event.preventDefault();
       let camerasPicked = {
         cameraName: camera.name,
@@ -92,6 +95,8 @@ document.addEventListener("DOMContentLoaded", (event)  => {
         cameraPrice: camera.price / 100,
       };
 
+      console.log(camerasPicked);
+
       
       if(confirmProduct(camerasPicked)) {
         urlReload = "panier.html";
@@ -100,4 +105,3 @@ document.addEventListener("DOMContentLoaded", (event)  => {
 
       location.reload = urlReload;
   });
-});

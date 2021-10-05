@@ -1,8 +1,9 @@
 
-const request = async (urlRequest) => {
-  response = await fetch("urlRequest");
+
+const cameras = async () => {
+  response = await fetch("http://localhost:3000/api/cameras/");
   return response.json();
-}
+};
 
 const displayListing = (cameras) => {
   if(cameras.length === 0) {
@@ -42,4 +43,4 @@ const displayListing = (cameras) => {
 
 cameras().then(data => {
   displayListing(data)
-});
+})
