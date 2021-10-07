@@ -65,6 +65,8 @@ const createTpl = (camera) => {
       addCamera.id = "submit";
       addCamera.textContent = "Ajouter au panier";
 }
+
+
       const createSelect = (lenses) => {
 
 
@@ -77,6 +79,8 @@ const createTpl = (camera) => {
 }
 
 
+
+
 document.addEventListener("DOMContentLoaded", (event)  => {
   
   let urlReload = "index.html";
@@ -85,7 +89,7 @@ document.addEventListener("DOMContentLoaded", (event)  => {
   
 });
 
-  document.addEventListener("click", function (event) {
+  addCamera.addEventListener("click", function (event) {
       event.preventDefault();
       let camerasPicked = {
         cameraName: camera.name,

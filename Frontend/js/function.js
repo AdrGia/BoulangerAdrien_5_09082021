@@ -1,11 +1,5 @@
 
 
-const request = async (urlApi) => {
-  response = await fetch(urlApi);
-  return response.json();
-}
-
-
 const addBasket = (camerasPicked, ...basket) => {
   if(!camerasPicked?.cameraId) {
     console.error("Invalid object");
