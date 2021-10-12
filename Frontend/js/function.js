@@ -1,4 +1,10 @@
 
+const requestApi = async(urlApi) => {
+  return await fetch(urlApi).then( (response) => response.json()).catch(error => {
+      console.error(error);
+      throw new Error(`Error: ${error.message}`);
+    });
+}
 
 const addBasket = (camerasPicked, ...basket) => {
   if(!camerasPicked?.cameraId) {
@@ -9,6 +15,7 @@ const addBasket = (camerasPicked, ...basket) => {
   localStorage.setItem("newArticle", JSON.stringify(basket));
 }
 
+
 const confirmProduct = (camerasPicked) => {
     if(!camerasPicked?.cameraId) {
     console.error("Invalid object");
@@ -17,24 +24,4 @@ const confirmProduct = (camerasPicked) => {
   const select = document.querySelector("#select_1");
   const message = `${camerasPicked.name} ${select.value} a bien été ajouté. Souhaitez vous consulter votre panier ?`;
   return window.confirm(message);
-}
-
-const checkContact = {
-                firstName: firstName.value,
-                lastName: lastName.value,
-                address: address.value,
-                city: city.value,
-                email: mail.value,
-            }
-
- const checkProducts = [];
-            for (stockCamera of stockCameras) {
-                let productsId = stockCamera.cameraId;
-                products.push((productsId));
-            }
-
-const checkSend = {
-
-                checkContact,
-                checkProducts,
 }

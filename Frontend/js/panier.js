@@ -68,8 +68,6 @@ if(stockCameras == null || stockCameras.length === 0){
     };
 }
 
-
-
     let calculPrice = []
     for (stockCamera of stockCameras) {
         let article = stockCamera.cameraPrice;
@@ -212,8 +210,12 @@ const divFirstName = document.createElement("div");
     mail.name = "Adresse mail";
     mail.required = true;
 
+    contact_details().then((data) =>{
+        createTpl(data)
+    });   
 
-};    
+};
+  
 
     const divValid = document.createElement("div");
     form.appendChild(divValid);
@@ -228,43 +230,52 @@ const divFirstName = document.createElement("div");
 
 const createSelect = (send) => {
 
-    try {
+    valid.addEventListener('click', ((event) =>{
+        if(validName(firstName.value) && validName(lastName.value) && validAddress(address.value) && validName(city.value) && validMail(mail.value)) {
+            event.preventDefault();
+            localStorage.setItem('totalPrice', totalPrice);
+            const storagePrice = localStorage.getItem('totalPrice');
+            console.log(storagePrice);
 
-    valid.addEventListener('click', ((event) => {
-    if(validName(firstName.value) && validName(lastName.value) && validAddress(address.value) && validName(city.value) && validMail(mail.value)) {
-     event.preventDefault();
-    localStorage.setItem("totalPrice", totalPrice);
-   const storagePrice = localStorage.getItem("totalPrice");
-   console.log(storagePrice);
+            let contact = {
+                firstName: firstName.value,
+                lastName: lastName.value,
+                address: address.value,
+                city: city.value,
+                emal: mail.value,
+            }
 
-  const contact = checkContact();
-  const products = checkProducts();
-  const send = checkSend();
-  post(send).then((data) =>{
-    redirect(data);
+             let products = [];
+            for (stockCamera of stockCameras) {
+                let productsId = stockCamera.cameraId;
+                products.push((productsId));
+            }
 
-  })
+             let send = {
+                contact,
+                products,
+            }
 
-  };
+            post(send).then((data) =>{
+            redirect(data);
+            });   
+        }
 
-})
+    }))
+};
 
-} catch(error) {
-    console.error(error);
-};     
-
+       
 const post = async function(data) => {
 
-     try {
-             const request = ("http://localhost:3000/api/cameras/" + order, {
-                method: "POST",
-                body: JSON.stringify(data),
-                headers: {
+    try {
+       const requestApi = ("http://localhost:3000/api/cameras/" + order, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
                             "Content-Type": "application/json"
                 }
-
-            });
-                if(response.ok) {
+       });
+          if(response.ok) {
                     let data = await response.json();
                      console.log(data.orderId);
                     localStorage.setItem("responseOrder", data.orderId);
@@ -277,8 +288,8 @@ const post = async function(data) => {
                 }
             } catch (error) {
                 alert("Erreur :" + error);
-            }
-    };  
-}; 
+            }      
+    }
+       post(send);
+}    
 
-post(send);   
