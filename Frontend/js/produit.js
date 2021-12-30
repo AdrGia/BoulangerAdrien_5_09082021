@@ -42,11 +42,6 @@ const createTpl = (camera) => {
       label.textContent = "Choix de la lentille : ";
       label.setAttribute("for", "Choix de la lentille " + camera.name);
 
-      const select = document.createElement("select");
-      formDiv.appendChild(select);
-      select.setAttribute("name", "Choix de la lentille" + camera.name);
-      select.setAttribute("id", "select_1" );
-
       let addCamera = document.createElement("button");
       form.appendChild(addCamera);
       addCamera.type = "submit";
@@ -54,18 +49,23 @@ const createTpl = (camera) => {
       addCamera.id = "submit";
       addCamera.textContent = "Ajouter au panier";
 
-  createSelect(camera.lenses);    
+   createSelect(camera, formDiv);  
 }
 
 
 
-const createSelect = (lenses) => {
-  for (i = 0; i < lenses.length; i++) {
+const createSelect = (camera, formDiv) => {
+  const select = document.createElement("select");
+  formDiv.appendChild(select);
+  select.setAttribute("name", "Choix de la lentille" + camera.name);
+  select.setAttribute("id", "select_1" );
+  
+  for (i = 0; i < camera.lenses.length; i++) {
     const selectOption = document.createElement("option");
-    selectOption.textContent = lenses[i];
-    selectOption.setAttribute=("value", lenses[i]);
+    selectOption.textContent = camera.lenses[i];
+    selectOption.setAttribute("value", camera.lenses[i]);
+    select.appendChild(selectOption);
   }
- console.log(lenses); 
 }
 
 
@@ -83,17 +83,17 @@ document.addEventListener("DOMContentLoaded", (event)  => {
       event.preventDefault();
       
       let urlReload = "index.html";
-      const basket = (JSON.parse(localStorage.getItem('newArticle')) ?? []);
+      const stockCameras = (JSON.parse(localStorage.getItem('newArticle')) ?? []);
       
       let camerasPicked = {
-        cameraName: camera.name,
-        cameraId: camera._id,
-        cameraLenses: select.value,
+        cameraName: data.name,
+        cameraId: data._id,
+        cameraLenses: data.value,
         quantity: 1,
-        cameraPrice: camera.price / 100,
+        cameraPrice: data.price / 100,
       };
-      console.log(camerasPicked);
       
+      console.log(camerasPicked);
       location.reload = urlReload;
 
     });

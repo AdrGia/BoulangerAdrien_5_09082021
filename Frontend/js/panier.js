@@ -68,15 +68,16 @@ if(stockCameras == null || stockCameras.length === 0){
     };
 }
 
-    let calculPrice = []
+   
+const calculPrice = (data) => {
     for (stockCamera of stockCameras) {
         let article = stockCamera.cameraPrice;
         calculPrice.push(article);
-    }
-
+    }    
+}
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    const totalPrice = calculPrice.reduce(reducer, 0);
+    const totalPrice = calculPrice.reducer(reducer, 0);
     console.log(totalPrice);
 
     const total = document.createElement("p");
@@ -127,8 +128,8 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
          return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
     };
 
-const createTpl = (contact_details) => {
 
+const createTpl = (contact_details) => {
 
 const divFirstName = document.createElement("div");
     form.appendChild(divFirstName);
@@ -262,34 +263,32 @@ const createSelect = (send) => {
         }
 
     }))
-};
+}
 
        
-const post = async function(data) => {
-
+const post = async(data) => {
     try {
-       const requestApi = ("http://localhost:3000/api/cameras/" + order, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-                            "Content-Type": "application/json"
-                }
-       });
-          if(response.ok) {
-                    let data = await response.json();
-                     console.log(data.orderId);
-                    localStorage.setItem("responseOrder", data.orderId);
-                    window.location = "confirmation.html";
-                    localStorage.removeItem("newArticle");
-                 } else {
-                     event.preventDefault();
-                    console.error("Retour du serveur: ", response.status);
-                    alert("Erreur rencontrée : " + response.status);
-                }
-            } catch (error) {
-                alert("Erreur :" + error);
-            }      
+        const requestApi = ("http://localhost:3000/api/cameras/" + order,{
+            method: "POST",
+            body: JSON.stringify(data),
+            hearders: {
+                "Content-Type": "application/json"
+            }
+        });
+        if(response.ok) {
+            let data = await response.json();
+            console.log(data.orderId);
+            localStorage.setItem('responseOrder', data.orderId);
+            window.location = "confirmation.html";
+            localStorage.removeItem("newArticle");
+        } else {
+            event.preventDefault();
+            console.error("Retour du serveur : ", response.status);
+            alert("Erreur rencontrée : " + response.status);
+            }
+    } catch (error) {
+        alert("Erreur :" + error);
     }
-       post(send);
-}    
+}
+ 
 
