@@ -1,4 +1,5 @@
-
+// Mettre le select avec la quantité
+// récupérer la quantité dans l'objet camerasPicked
 
 const createTpl = (camera) => {
 
@@ -58,7 +59,7 @@ const createSelect = (camera, formDiv) => {
   const select = document.createElement("select");
   formDiv.appendChild(select);
   select.setAttribute("name", "Choix de la lentille" + camera.name);
-  select.setAttribute("id", "select_1" );
+  select.setAttribute("id", "select_lens" );
   
   for (i = 0; i < camera.lenses.length; i++) {
     const selectOption = document.createElement("option");
@@ -81,23 +82,52 @@ document.addEventListener("DOMContentLoaded", (event)  => {
     
     addCamera.addEventListener("click", function (event) {
       event.preventDefault();
-      
-      let urlReload = "index.html";
-      const stockCameras = (JSON.parse(localStorage.getItem('newArticle')) ?? []);
+
+      const selectLensValue = document.querySelector("#select_lens").value;
+      //const quantityValue = document.querySelector("#quantity").value; input number
+      const stockCameras = JSON.parse(localStorage.getItem('newArticle')) ?? [];
       
       let camerasPicked = {
         cameraName: data.name,
         cameraId: data._id,
-        cameraLenses: data.value,
-        quantity: 1,
+        cameraLenses: selectLensValue,
+        quantity: 1, //quantityValue
         cameraPrice: data.price / 100,
       };
-      
-      console.log(camerasPicked);
-      location.reload = urlReload;
 
+      let newBasket = [];
+      if(!hasProductIntoBasket(stockCameras, camerasPicked)) {
+          stockCameras.push(camerasPicked);
+          newBasket = stockCameras;
+      } else {
+          newBasket = manageProduct(stockCameras, camerasPicked);
+      }
+
+      localStorage.setItem('newArticle', JSON.stringify(newBasket));
     });
   });
   
 });
+
+const hasProductIntoBasket = (basket, camerasPicked) => {
+    if(!basket || !camerasPicked) {
+        console.error('Missing parameters');
+        throw new Error('Bad parameters');
+    }
+    return basket.find((product) => product.cameraId === camerasPicked.cameraId
+        && product.cameraLenses === camerasPicked.cameraLenses);
+}
+const manageProduct = (basket, camerasPicked) => {
+    if(!basket || !camerasPicked) {
+        console.error('Missing parameters');
+        throw new Error('Bad parameters');
+    }
+    basket.map((product) => {
+        if(product.cameraId === camerasPicked.cameraId && product.cameraLenses === camerasPicked.cameraLenses) {
+            product.quantity += 1;
+        }
+        return product;
+    });
+    return basket;
+}
 

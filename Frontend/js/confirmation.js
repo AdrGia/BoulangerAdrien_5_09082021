@@ -1,9 +1,5 @@
-
-let orderId = localStorage.getItem("responseOrder");
-console.log(orderId);
-
-let totalPrice = localStorage.getItem("totalPrice");
-console.log(totalPrice);
+const orderId = localStorage.getItem("responseOrder");
+const totalPrice = localStorage.getItem("totalPrice");
 
 const article = document.getElementById("page_product");
 const cameraDiv = document.createElement("div");
@@ -44,4 +40,7 @@ cameraDivConfirm.appendChild(cameraP6);
 cameraP6.textContent = "Montant total de la commande : " + totalPrice + "€";
 cameraP6.className = "confirm_p";
 
-localStorage.clear();
+document.querySelector('.button-return').addEventListener('click', () => {
+    localStorage.clear();
+})
+
