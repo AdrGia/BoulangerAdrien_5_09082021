@@ -99,10 +99,11 @@ document.addEventListener("DOMContentLoaded", (event)  => {
       if(!hasProductIntoBasket(stockCameras, camerasPicked)) {
           stockCameras.push(camerasPicked);
           newBasket = stockCameras;
+          
       } else {
           newBasket = manageProduct(stockCameras, camerasPicked);
       }
-
+      
       localStorage.setItem('newArticle', JSON.stringify(newBasket));
     });
   });

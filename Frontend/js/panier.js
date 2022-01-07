@@ -66,23 +66,22 @@ if (stockCameras == null || stockCameras.length === 0) {
             window.location.href = "panier.html";
         });
     }
-}
 
-
-const calculatePrice = () => {
-    let priceQuantity = [];
-    for (let stockCamera of stockCameras) {
+    const calculatePrice = () => {
+        let priceQuantity = [];
+        for (let stockCamera of stockCameras) {
         priceQuantity.push(stockCamera.cameraPrice * stockCamera.quantity);
+        }
+        return priceQuantity;
     }
-    return priceQuantity;
+
+    const totalPrice = calculatePrice().reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+    const total = document.createElement("p");
+    cameraDivBasket.appendChild(total);
+    total.className = "total";
+    total.textContent = "Le montant total : " + totalPrice + "€";
 }
-
-const totalPrice = calculatePrice().reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-
-const total = document.createElement("p");
-cameraDivBasket.appendChild(total);
-total.className = "total";
-total.textContent = "Le montant total : " + totalPrice + "€";
 
 const suppress = document.createElement("button");
 cameraDivBasket.appendChild(suppress);
@@ -154,7 +153,7 @@ valid.addEventListener('click', ((event) => {
         && !validName(city.value)
         && !validMail(email.value)
     ) {
-        throw new Error("Remplissez tous les champs !") // Créer une div error et l'affiché lorsque le formulaire est en erreur
+       
     }
 
     const contact = {
