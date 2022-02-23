@@ -15,6 +15,13 @@ const cameraH3 = document.createElement("h3");
 cameraDivBasket.appendChild(cameraH3);
 cameraH3.textContent = "Votre commande :";
 
+const calculatePrice = (products) => {
+    let priceQuantity = [];
+    for (let stockCamera of products) {
+        priceQuantity.push(stockCamera.cameraPrice * stockCamera.quantity);
+    }
+    return priceQuantity;
+}
 
 if (stockCameras == null || stockCameras.length === 0) {
 
@@ -67,16 +74,7 @@ if (stockCameras == null || stockCameras.length === 0) {
         });
     }
 
-    const calculatePrice = () => {
-        let priceQuantity = [];
-        for (let stockCamera of stockCameras) {
-        priceQuantity.push(stockCamera.cameraPrice * stockCamera.quantity);
-        }
-        return priceQuantity;
-    }
-
-    const totalPrice = calculatePrice().reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-
+    const totalPrice = calculatePrice(stockCameras).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     const total = document.createElement("p");
     cameraDivBasket.appendChild(total);
     total.className = "total";
@@ -153,7 +151,7 @@ valid.addEventListener('click', ((event) => {
         && !validName(city.value)
         && !validMail(email.value)
     ) {
-       
+
     }
 
     const contact = {
@@ -169,8 +167,11 @@ valid.addEventListener('click', ((event) => {
         products.push((stockCamera.cameraId));
     }
 
-    post({ contact, products}).then((data) => {
-        localStorage.setItem('totalPrice', totalPrice);
+    post({contact, products}).then((data) => {
+        localStorage.setItem('totalPrice',
+            calculatePrice(stockCameras)
+                .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+        );
         localStorage.setItem('responseOrder', data.orderId);
         location.href = 'confirmation.html';
     }).catch((error) => {
