@@ -1,5 +1,3 @@
-// Mettre le select avec la quantité
-// récupérer la quantité dans l'objet camerasPicked
 
 const createTpl = (camera) => {
 
@@ -67,19 +65,6 @@ const createSelect = (camera, formDiv) => {
   }
 }
 
-const createSelectQuantity = () => {
-  const selectQuantity = document.createElement("select");
-  select.setAttribute("name", "La quantité")
-  select.setAttribute("id", "select_quantity");
-
-  for (i = 0; i < camera.quantity.length; i++) {
-    const selectQuantityOption = document.createElement("option");
-    selectQuantityOption.textContent = camera.lenses[i].quantity;
-    selectQuantityOption.setAttribute("value", camera.lenses[i].quantity);
-    select.appendChild(selectOption);
-  }
-}
-
 document.addEventListener("DOMContentLoaded", (event)  => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -93,18 +78,15 @@ document.addEventListener("DOMContentLoaded", (event)  => {
       event.preventDefault();
 
       const selectLensValue = document.querySelector("#select_lens").value;
-      const quantityValue = document.querySelector("#quantity").value; //input number//
       const stockCameras = JSON.parse(localStorage.getItem('newArticle')) ?? [];
       
       let camerasPicked = {
         cameraName: data.name,
         cameraId: data._id,
         cameraLenses: selectLensValue,
-        quantity: quantityValue,
+        quantity: 1,
         cameraPrice: data.price / 100,
       };
-
-      
 
       let newBasket = [];
       if(!hasProductIntoBasket(stockCameras, camerasPicked)) {
@@ -129,6 +111,7 @@ const hasProductIntoBasket = (basket, camerasPicked) => {
     return basket.find((product) => product.cameraId === camerasPicked.cameraId
         && product.cameraLenses === camerasPicked.cameraLenses);
 }
+
 const manageProduct = (basket, camerasPicked) => {
     if(!basket || !camerasPicked) {
         console.error('Missing parameters');
@@ -142,4 +125,5 @@ const manageProduct = (basket, camerasPicked) => {
     });
     return basket;
 }
+
 

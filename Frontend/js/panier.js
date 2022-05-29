@@ -1,4 +1,3 @@
-// Mettre les images dans le html pour les lignes produits
 
 const stockCameras = JSON.parse(localStorage.getItem("newArticle"));
 
@@ -180,7 +179,6 @@ valid.addEventListener('click', ((event) => {
 
 
 }))
-
 
 const post = async (data) => {
     return await fetch("http://localhost:3000/api/cameras/order", {

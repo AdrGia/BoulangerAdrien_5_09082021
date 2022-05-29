@@ -15,7 +15,6 @@ const addBasket = (camerasPicked, ...basket) => {
   localStorage.setItem("newArticle", JSON.stringify(basket));
 }
 
-
 const confirmProduct = (camerasPicked) => {
     if(!camerasPicked?.cameraId) {
     console.error("Invalid object");
