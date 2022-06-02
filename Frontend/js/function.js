@@ -44,13 +44,13 @@ const createTplForm = () => {
     firstName.setAttribute("class", "firstName");
     firstName.name = "Prénom";
     firstName.required = true;
-
+    //validation du prénom//
     firstName.addEventListener("change", function(event) {
-        if (NameValid(firstName.value)) {
+        if (validName(firstName.value)) {
 
         } else {
             event.preventDefault()
-            alert("Aucub chiffre ou symbole n'est autorisé !")
+            alert("Aucun chiffre ou symbole n'est autorisé !")
         }
     });
 
@@ -70,9 +70,9 @@ const createTplForm = () => {
     lastName.setAttribute("class", "lastName");
     lastName.name = "Nom";
     lastName.required = true;
-
+    //validation du nom//
     lastName.addEventListener("change", function(event) {
-        if(NameValid(lastName.value)) {
+        if(validName(lastName.value)) {
 
         } else {
             event.preventDefault()
@@ -96,7 +96,7 @@ const createTplForm = () => {
     address.setAttribute("class", "address");
     address.name = "Adresse";
     address.required = true;
-
+    //validation de l'adresse mail//
     address.addEventListener("change", function(event) {
         if (validAddress(address.value)){
 
@@ -122,7 +122,7 @@ const createTplForm = () => {
     city.setAttribute("class", "city");
     city.name = "Ville";
     city.required = true;
-
+    //validation de la ville//
     city.addEventListener('change', function(event) {
         if(validName(city.value)){
 
@@ -148,13 +148,13 @@ const createTplForm = () => {
     mail.setAttribute("class", "email");
     mail.name = "Adresse mail";
     mail.required = true;
-
+    //validation du mail//
     mail.addEventListener('change', function(event) {
         if(validMail(mail.value)){
 
         } else {
             event.preventDefault()
-            alert("Veuillez saisir une adresse mail valide ! (exemple: abc@mail.com)");
+            alert("Veuillez saisir une adresse mail valide !(exemple: abc@mail.com");
         }
     });
 };
