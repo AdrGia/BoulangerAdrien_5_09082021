@@ -1,4 +1,4 @@
-
+//récupération données LocalStorage//
 const stockCameras = JSON.parse(localStorage.getItem("newArticle"));
 
 const article = document.getElementById("page_product");
@@ -15,6 +15,7 @@ cameraDivBasket.appendChild(cameraH3);
 cameraH3.textContent = "Votre commande :";
 
 const calculatePrice = (products) => {
+    //calcul du montant total//
     let priceQuantity = [];
     for (let stockCamera of products) {
         priceQuantity.push(stockCamera.cameraPrice * stockCamera.quantity);
@@ -23,12 +24,13 @@ const calculatePrice = (products) => {
 }
 
 if (stockCameras == null || stockCameras.length === 0) {
-
+    //si le panier est vide//
     const blankBasket = document.createElement("p");
     cameraDivBasket.appendChild(blankBasket);
     blankBasket.className = "blank_basket";
     blankBasket.textContent = "Votre panier est vide."
 } else {
+    //récupération des éléments du panier//
     let i = 0;
     for (let stockCamera of stockCameras) {
         const eachCamera = document.createElement("div");
@@ -47,7 +49,7 @@ if (stockCameras == null || stockCameras.length === 0) {
         const price = document.createElement("p");
         cameraPrice.appendChild(price);
         price.textContent = (stockCamera.cameraPrice * stockCamera.quantity) + " € "
-
+        //création du bouton supprimer//
         const delectButton = document.createElement("button");
         cameraPrice.appendChild(delectButton);
         delectButton.className = "delect_button";
@@ -83,7 +85,7 @@ if (stockCameras == null || stockCameras.length === 0) {
 const suppress = document.createElement("button");
 cameraDivBasket.appendChild(suppress);
 suppress.className = "icon_suppress";
-
+//création du bouton pour vider le panier//
 const basketLink = document.createElement("a");
 suppress.appendChild(basketLink);
 basketLink.href = "panier.html";
@@ -102,7 +104,7 @@ suppress.addEventListener("click", function (event) {
     window.location.href = "panier.html";
 });
 
-
+//création du formulaire//
 const form = document.createElement("form");
 form.className = "contact_form";
 cameraDivBasket.appendChild(form);
@@ -111,20 +113,20 @@ const cameraH3bis = document.createElement("h3");
 form.appendChild(cameraH3bis);
 cameraH3bis.textContent = "Remplir ce formulaire pour valider votre commande : ";
 createTplForm();
-
+//création fonctions de validité nom//
 function validName(value) {
     return /^[A-Z-a-z\s]{3,40}$/.test(value);
 }
-
+// création fonctions de validité adresse//
 function validAddress(value) {
     return /^[A-Z-a-z-0-9\s]{5,80}$/.test(value);
 }
-
+//création fonctions de validité mail//
 function validMail(value) {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
 }
 
-
+//création bouton validation//
 const divValid = document.createElement("div");
 form.appendChild(divValid);
 divValid.className = "div_name";
@@ -136,7 +138,7 @@ valid.name = "add";
 valid.id = "valid";
 valid.textContent = "Valider votre commande";
 
-
+//envoie des données panier 
 valid.addEventListener('click', ((event) => {
     event.preventDefault();
     const firstName = document.querySelector('.firstName');
@@ -179,7 +181,7 @@ valid.addEventListener('click', ((event) => {
 
 
 }))
-
+//envoie des données au serveur//
 const post = async (data) => {
     return await fetch("http://localhost:3000/api/cameras/order", {
         method: "POST",

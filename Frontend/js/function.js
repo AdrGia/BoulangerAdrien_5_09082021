@@ -1,5 +1,6 @@
 
 const requestApi = async(urlApi) => {
+        //connexion sur API//
   return await fetch(urlApi).then( (response) => response.json()).catch(error => {
       console.error(error);
       throw new Error(`Error: ${error.message}`);
@@ -16,6 +17,7 @@ const addBasket = (camerasPicked, ...basket) => {
 }
 
 const confirmProduct = (camerasPicked) => {
+    //création de la confirmation du produit dans le panier//
     if(!camerasPicked?.cameraId) {
     console.error("Invalid object");
     return;
@@ -26,7 +28,7 @@ const confirmProduct = (camerasPicked) => {
 }
 
 const createTplForm = () => {
-
+    //ajout formulaire prénom//
     const divFirstName = document.createElement("div");
     form.appendChild(divFirstName);
     divFirstName.className = "div_name";
@@ -43,6 +45,16 @@ const createTplForm = () => {
     firstName.name = "Prénom";
     firstName.required = true;
 
+    firstName.addEventListener("change", function(event) {
+        if (NameValid(firstName.value)) {
+
+        } else {
+            event.preventDefault()
+            alert("Aucub chiffre ou symbole n'est autorisé !")
+        }
+    });
+
+    //ajout formulaire nom//
     const divLastName = document.createElement("div");
     form.appendChild(divLastName);
     divLastName.className = "div_name";
@@ -59,6 +71,16 @@ const createTplForm = () => {
     lastName.name = "Nom";
     lastName.required = true;
 
+    lastName.addEventListener("change", function(event) {
+        if(NameValid(lastName.value)) {
+
+        } else {
+            event.preventDefault()
+            alert("Aucun chiffre ou symbole n'est autorisé !")
+        }
+    });
+
+    //ajout formulaire adresse//
     const divAddress = document.createElement("div");
     form.appendChild(divAddress);
     divAddress.className = "div_name";
@@ -75,6 +97,16 @@ const createTplForm = () => {
     address.name = "Adresse";
     address.required = true;
 
+    address.addEventListener("change", function(event) {
+        if (validAddress(address.value)){
+
+        } else {
+            event.preventDefault()
+            alert("Aucun symbole n'est autorisé !")
+        }
+    });
+
+    //ajout formulaire ville///
     const divCity = document.createElement("div");
     form.appendChild(divCity);
     divCity.className = "div_name";
@@ -91,6 +123,16 @@ const createTplForm = () => {
     city.name = "Ville";
     city.required = true;
 
+    city.addEventListener('change', function(event) {
+        if(validName(city.value)){
+
+        } else {
+            event.preventDefault()
+            alert("Aucun chiffre ou symbole n'est autorisé !")
+        }
+    })
+
+    // ajout formulaire email//
     const divMail = document.createElement("div");
     form.appendChild(divMail);
     divMail.className = "div_name";
@@ -106,4 +148,13 @@ const createTplForm = () => {
     mail.setAttribute("class", "email");
     mail.name = "Adresse mail";
     mail.required = true;
+
+    mail.addEventListener('change', function(event) {
+        if(validMail(mail.value)){
+
+        } else {
+            event.preventDefault()
+            alert("Veuillez saisir une adresse mail valide ! (exemple: abc@mail.com)");
+        }
+    });
 };

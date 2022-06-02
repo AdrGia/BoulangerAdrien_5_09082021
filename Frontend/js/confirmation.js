@@ -1,6 +1,8 @@
+//récupération de l'id de la commande//
 const orderId = localStorage.getItem("responseOrder");
+//récupération du prix total de la commande//
 const totalPrice = localStorage.getItem("totalPrice");
-
+//création de la page de confirmation//
 const article = document.getElementById("page_product");
 const cameraDiv = document.createElement("div");
 article.appendChild(cameraDiv);
@@ -39,7 +41,7 @@ const cameraP6 = document.createElement("p");
 cameraDivConfirm.appendChild(cameraP6);
 cameraP6.textContent = "Montant total de la commande : " + totalPrice + "€";
 cameraP6.className = "confirm_p";
-
+//buton du clear du LocalStorage//
 document.querySelector('.button-return').addEventListener('click', () => {
     localStorage.clear();
 })

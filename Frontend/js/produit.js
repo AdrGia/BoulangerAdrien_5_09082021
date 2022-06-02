@@ -1,6 +1,6 @@
 
 const createTpl = (camera) => {
-
+    //création de la template de la page produit//
      const article = document.getElementById("page_product");
 
       const cameraDiv = document.createElement("div");
@@ -20,15 +20,18 @@ const createTpl = (camera) => {
       const cameraH4 = document.createElement("h4");
       page_product.appendChild(cameraH4);
       cameraH4.textContent = camera.name;
-
+      
+      //ajout de la description//
       const cameraP = document.createElement("p");
       page_product.appendChild(cameraP);
       cameraP.textContent = camera.description;
-
+      
+      //ajout du prix//
       const cameraPrice = document.createElement("p");
       page_product.appendChild(cameraPrice);
       cameraPrice.textContent = "Son prix : " + camera.price / 100 + "€";
 
+      //création choix des lentilles//
      const form = document.createElement("form");
       page_product.appendChild(form);
 
@@ -52,6 +55,7 @@ const createTpl = (camera) => {
 }
 
 const createSelect = (camera, formDiv) => {
+  //création ajout des différents lentilles//
   const select = document.createElement("select");
   formDiv.appendChild(select);
   select.setAttribute("name", "Choix de la lentille" + camera.name);
@@ -68,10 +72,13 @@ const createSelect = (camera, formDiv) => {
 document.addEventListener("DOMContentLoaded", (event)  => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
+  //récupération des données de cameras sélectionné par son id//
   const id = urlParams.get('id');
   requestApi(`http://localhost:3000/api/cameras/${id}`).then( (data) => {
     event.preventDefault();
     createTpl(data);
+
+    //création bouton panier//
     const addCamera = document.querySelector("#submit");
     
     addCamera.addEventListener("click", function (event) {
@@ -81,6 +88,7 @@ document.addEventListener("DOMContentLoaded", (event)  => {
       const stockCameras = JSON.parse(localStorage.getItem('newArticle')) ?? [];
       
       let camerasPicked = {
+        //stockage des données du/des cameras souhaité dans LocalStorage//
         cameraName: data.name,
         cameraId: data._id,
         cameraLenses: selectLensValue,
